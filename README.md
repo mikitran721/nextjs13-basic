@@ -2,6 +2,10 @@
 
 npm i --save-exact react-bootstrap@2.8.0 bootstrap@5.3.0
 
+# cai dat toastify@9.1.3
+
+`npm i --save-exact react-toastify@9.1.3`
+
 # `Thu vien toi uu`
 
 - `SWR`: React Hook for Data Fetching; duoc vercel tai tro
@@ -23,3 +27,4 @@ npm i --save-exact react-bootstrap@2.8.0 bootstrap@5.3.0
 `2:20:00`
 `2:41:00`
 `3:00:00`
+`3:25:00`

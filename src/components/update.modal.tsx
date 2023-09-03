@@ -2,22 +2,35 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { mutate } from "swr";
 
 // can dinh nghia kieu cho props
 interface IProps {
-  showModalCreate: boolean;
-  setShowModalCreate: (v: boolean) => void;
+  showModalUpdate: boolean;
+  setShowModalUpdate: (v: boolean) => void;
+  blog: IBlog | null;
+  setBlog: (value: IBlog | null) => void;
 }
 
-function CreateModal(props: IProps) {
-  const { showModalCreate, setShowModalCreate } = props;
+function UpdateModal(props: IProps) {
+  const { showModalUpdate, setShowModalUpdate, blog, setBlog } = props;
 
+  const [id, setId] = useState<number>(0);
   const [title, setTitle] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
   const [content, setContent] = useState<string>("");
+
+  // moi lan blog thay doi can cap nhat lai state cua react
+  useEffect(() => {
+    if (blog && blog.id) {
+      setId(blog.id);
+      setTitle(blog.title);
+      setAuthor(blog.author);
+      setContent(blog.content);
+    }
+  }, [blog]);
 
   const handleSubmit = () => {
     if (!title) {
@@ -32,8 +45,8 @@ function CreateModal(props: IProps) {
       toast.error("Not empty content");
       return;
     }
-    fetch("http://localhost:8000/blogs", {
-      method: "POST",
+    fetch(`http://localhost:8000/blogs/${id}`, {
+      method: "PUT",
       headers: {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
@@ -43,9 +56,9 @@ function CreateModal(props: IProps) {
       .then((res) => res.json())
       .then((res) => {
         if (res) {
-          toast.success("Create succeed.. !");
+          toast.warning("Blog update succeed.. !");
           handleCloseModal();
-          mutate("http://localhost:8000/blogs");
+          mutate("http://localhost:8000/blogs"); //load lai data - chi can key
         }
       });
 
@@ -57,13 +70,14 @@ function CreateModal(props: IProps) {
     setTitle("");
     setAuthor("");
     setContent("");
-    setShowModalCreate(false);
+    setBlog(null);
+    setShowModalUpdate(false);
   };
 
   return (
     <>
       <Modal
-        show={showModalCreate}
+        show={showModalUpdate}
         onHide={() => handleCloseModal()}
         backdrop="static"
         keyboard={false}
@@ -116,4 +130,4 @@ function CreateModal(props: IProps) {
   );
 }
 
-export default CreateModal;
+export default UpdateModal;
