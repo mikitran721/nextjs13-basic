@@ -21,17 +21,9 @@ export default function Home() {
     }
   );
 
-  console.log("Check data from swr: ", data);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const res = await fetch("http://localhost:8000/blogs");
-  //     const data = await res.json();
-  //     console.log("check response: ", data);
-  //   };
-
-  //   fetchData();
-  // }, []);
+  if (!data) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -49,7 +41,7 @@ export default function Home() {
           <Link href={"/tiktok"}>Tiktok </Link>
         </li>
       </ul>
-      <AppTable />
+      <AppTable blogs={data} />
     </>
   );
 }
