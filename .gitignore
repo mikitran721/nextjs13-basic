@@ -1,6 +1,9 @@
 /.history
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+#server fake json
+/server/node_modules
+
 # dependencies
 /node_modules
 /.pnp
