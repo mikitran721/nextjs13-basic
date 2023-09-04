@@ -19,7 +19,7 @@ npm i --save-exact react-bootstrap@2.8.0 bootstrap@5.3.0
 
 - file \*.d.ts: d la viet tat cua `datatype`
 - modal & static modal react-bootstrap
--
+- su dung `metadata` de thay doi tren trinh duyet -> chi hoat dong trong `server component`
 
 # gio hoc-clip:
 
@@ -28,3 +28,5 @@ npm i --save-exact react-bootstrap@2.8.0 bootstrap@5.3.0
 `2:41:00`
 `3:00:00`
 `3:25:00`
+`3:43:00` xong phan update blog
+`3:57:00`
